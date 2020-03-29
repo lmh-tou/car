@@ -3,7 +3,7 @@ const http = require('http');
 const badyParser = require('body-parser');
 const express = require('express');
 
-const userApi = require('./api/userApi');
+const registeredApi = require('./api/registered');
 
 let app = express();
 let server = http.createServer(app);
@@ -14,7 +14,7 @@ app.use(badyParser.urlencoded({
 }));
 
 // 后端api路由
-app.use('/api/user', userApi);
+app.use('/api/registered', registeredApi);
 
 // 启动监听
 server.listen(8888, () => {

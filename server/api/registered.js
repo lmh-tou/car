@@ -5,9 +5,10 @@ const router = express.Router();
 const DBHelper = require('../utils/DBHelper');
 const sql = require('../sqlMap');
 
-router.post('/test', (req, res) => {
+router.post('/add', (req, res) => {
     let conn = new DBHelper().getConn();
-    conn.query(sql.user.test, (err, result) => {
+    let params = req.body
+    conn.query(sql.registered.add, [params.userName, params.password, params.phone], (err, result) => {
         if (err) {
             res.json(err);
         } else {
