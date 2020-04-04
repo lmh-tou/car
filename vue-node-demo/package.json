@@ -17,10 +17,7 @@
     "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-<<<<<<< HEAD
     "vuex": "^3.1.3",
-=======
->>>>>>> a059bf0dba06de67116b58eae105fb00c2178a76
     "xlsx": "^0.15.4"
   },
   "devDependencies": {
