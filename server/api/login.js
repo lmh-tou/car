@@ -4,14 +4,14 @@ const router = express.Router();
 const DBHelper = require('../utils/DBHelper');
 const sql = require('../sqlMap');
 
-router.post('/add', (req, res) => {
+router.post('/login', (req, res) => {
     let conn = new DBHelper().getConn();
     let params = req.body
-    conn.query(sql.registered.add, [params.userName, params.password, params.phone], (err, result) => {
+    conn.query(sql.login.select, [params.userName, params.password, params.phone], (err, result) => {
         if (err) {
             res.json(err);
         } else {
-            res.json(result)
+            res.json({message: '登陆成功！'})
         }
     })
 })
