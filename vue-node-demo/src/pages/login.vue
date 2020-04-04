@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card">
+<el-card class="box-card">
     <el-row type="flex" justify="center">
       <el-col :span="12">
         <el-form
@@ -138,7 +138,3 @@ export default {
   }
 };
 </script>
-
-
-<style lang="scss" scoped>
-</style>

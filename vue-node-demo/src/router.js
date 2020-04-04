@@ -3,6 +3,12 @@ import Router from 'vue-router'
 import Login from './pages/login.vue'
 import Register from './pages/register.vue'
 
+// 路由跳转，可以先不看他
+import Vue from 'vue'
+import Router from 'vue-router'
+import Login from './pages/login.vue'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +27,7 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+
     }
   ]
 })
