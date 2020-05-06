@@ -12,13 +12,19 @@ router.post('/add', (req, res) => {
       if (result.length != 0) {
         res.json({ code: 0, session: 1 })
       } else {
-        conn.query(
-          sql.registered.add,
-          [params.userName, params.password, params.phone],
-          (err, result) => {
-            res.json({ code: 1, session: 1 })
+        conn.query(sql.registered.searchPhone, [params.phone], (err, result) => {
+          if (result.length != 0) {
+            res.json({ code: 2, session: 1 })
+          } else {
+            conn.query(
+              sql.registered.add,
+              [params.userName, params.password, params.phone],
+              (err, result) => {
+                res.json({ code: 1, session: 1 })
+              }
+            )
           }
-        )
+        })
       }
     })
   } else {
@@ -26,13 +32,19 @@ router.post('/add', (req, res) => {
       if (result.length != 0) {
         res.json({ code: 0, session: 1 })
       } else {
-        conn.query(
-          sql.registered.addSale,
-          [params.userName, params.password, params.phone],
-          (err, result) => {
-              res.json({code: 1, session: 1})
+        conn.query(sql.registered.searchSalePhone, [params.phone], (err, result) => {
+          if (result.length != 0) {
+            res.json({ code: 2, session: 1 })
+          } else {
+            conn.query(
+              sql.registered.addSale,
+              [params.userName, params.password, params.phone],
+              (err, result) => {
+                res.json({ code: 1, session: 1 })
+              }
+            )
           }
-        )
+        })
       }
     })
   }

@@ -107,6 +107,8 @@ export default {
           this.$http.post('/api/registered/add', formData).then((res) => {
             if (res.data.code == 0) {
               this.$message.error('用户名已存在')
+            } else if (res.data.code == 2) {
+              this.$message.error('手机号已存在')
             } else {
               this.$router.push('/login')
             }

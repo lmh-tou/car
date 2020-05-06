@@ -98,7 +98,7 @@ export default {
         userName: user.userName,
         password: user.password,
         phone: user.phone,
-        identity: this.radio
+        identity: this.radio,
       }
       // 表单验证
       this.$refs['formLogin'].validate((valid) => {
@@ -107,10 +107,12 @@ export default {
           this.$http.post('/api/login', formData).then((res) => {
             if (res.data.code == 1) {
               this.$message.success(res.data.message)
-              this.userLogin(res.data)
-              // 登录成功 跳转至首页
-              // this.$router.push({name:'Home'})
-              this.$router.push('/')
+              // this.userLogin(res.data)
+              console.log(res.data.identity)
+              if (res.data.identity == '卖家') {
+                this.$router.push('/sale')
+                sessionStorage.setItem('saleUserName', this.formLogin.userName)
+              }
             } else {
               this.$message.error(`${res.data.message}`)
               return false
