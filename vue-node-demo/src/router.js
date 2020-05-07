@@ -5,6 +5,8 @@ import Register from './pages/register.vue'
 import Sale from './pages/sale'
 import SaleManage from './pages/saleManage'
 import Upload from './pages/unload'
+import Admin from './pages/admin'
+import SaleTable from './pages/saleTable'
 
 
 Vue.use(Router)
@@ -40,6 +42,16 @@ export default new Router({
       path: '/upload',
       name: 'upload',
       component: Upload
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin
+    },
+    {
+      path: '/saleTable',
+      name: 'saleTable',
+      component: SaleTable
     }
   ]
 })

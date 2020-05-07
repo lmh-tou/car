@@ -107,11 +107,12 @@ export default {
           this.$http.post('/api/login', formData).then((res) => {
             if (res.data.code == 1) {
               this.$message.success(res.data.message)
-              // this.userLogin(res.data)
               console.log(res.data.identity)
               if (res.data.identity == '卖家') {
                 this.$router.push('/sale')
                 sessionStorage.setItem('saleUserName', this.formLogin.userName)
+              } else if (res.data.identity == '管理员') {
+                this.$router.push('/admin')
               }
             } else {
               this.$message.error(`${res.data.message}`)
