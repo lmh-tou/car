@@ -7,7 +7,7 @@
         </div>
       </el-card>
       <el-card class="box-card">
-        <div>
+        <div @click="upload">
           上传车辆信息
         </div>
       </el-card>
@@ -36,6 +36,12 @@ export default {
       })
       window.open(newpage.href, '_blank')
     },
+    upload() {
+      let newpage = this.$router.resolve({
+        name: 'upload',
+      })
+      window.open(newpage.href, '_blank')
+    }
   },
 }
 </script>

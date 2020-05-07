@@ -4,6 +4,7 @@ import Login from './pages/login.vue'
 import Register from './pages/register.vue'
 import Sale from './pages/sale'
 import SaleManage from './pages/saleManage'
+import Upload from './pages/unload'
 
 
 Vue.use(Router)
@@ -34,6 +35,11 @@ export default new Router({
       path: '/saleManage',
       name: 'saleManage',
       component: SaleManage
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: Upload
     }
   ]
 })

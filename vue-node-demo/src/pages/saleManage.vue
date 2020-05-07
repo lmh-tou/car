@@ -22,7 +22,7 @@
         <el-button @click="save">保存</el-button>
         <el-button @click="edit">修改</el-button>
       </div>
-      <div class="text">跳转到上传车辆信息</div>
+      <div class="text" @click="upload">跳转到上传车辆信息</div>
     </el-card>
   </div>
 </template>
@@ -79,6 +79,12 @@ export default {
           return false
         }
       })
+    },
+    upload() {
+      let newpage = this.$router.resolve({
+        name: 'upload',
+      })
+      window.open(newpage.href, '_blank')
     },
   },
   mounted() {

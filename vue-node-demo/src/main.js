@@ -5,10 +5,12 @@ import router from './router'
 import less from 'less'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import moment from 'moment'
 
 
 import axios from './util/interceptor.js'
 Vue.prototype.$http = axios;
+Vue.prototype.$moment = moment
 
 Vue.use(ElementUI)
 

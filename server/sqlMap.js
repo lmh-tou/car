@@ -14,7 +14,9 @@ var sqlMap = {
     sale: {
         list: 'select * from sale where userName = ?',
         save: 'update sale set password = ?, phone = ?, name = ?, address = ? where userName = ?',
-        searchPhone: 'select * from sale where phone = ?'
+        searchPhone: 'select * from sale where phone = ?',
+        upload: 'update sale set img = ? where userName = ?',
+        uploadMessage: 'update sale set brand = ?, time = ?, distance = ?, money = ?, describe1 = ? where userName = ?'
     }
 }
 
