@@ -67,13 +67,9 @@ export default {
               name: this.form.name,
               address: this.form.address,
             })
-            .then((res) => {
-              if (res.data.code == 0) {
-                this.$message.error('手机号已存在')
-              } else {
-                this.$message.success('修改成功')
-                this.reload()
-              }
+            .then(() => {
+              this.$message.success('修改成功')
+              this.reload()
             })
         } else {
           return false
@@ -81,10 +77,21 @@ export default {
       })
     },
     upload() {
-      let newpage = this.$router.resolve({
-        name: 'upload',
-      })
-      window.open(newpage.href, '_blank')
+      let saleUserName = sessionStorage.getItem('saleUserName')
+      this.$http
+        .post('/api/sale/list', {
+          saleUserName,
+        })
+        .then((res) => {
+          if (!res.data.data[0].address || !res.data.data[0].name) {
+            this.$message.error('请先完成用户信息管理')
+          } else {
+            let newpage = this.$router.resolve({
+              name: 'upload',
+            })
+            window.open(newpage.href, '_blank')
+          }
+        })
     },
   },
   mounted() {

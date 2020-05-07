@@ -37,11 +37,22 @@ export default {
       window.open(newpage.href, '_blank')
     },
     upload() {
-      let newpage = this.$router.resolve({
-        name: 'upload',
-      })
-      window.open(newpage.href, '_blank')
-    }
+      let saleUserName = sessionStorage.getItem('saleUserName')
+      this.$http
+        .post('/api/sale/list', {
+          saleUserName,
+        })
+        .then((res) => {
+          if (!res.data.data[0].address || !res.data.data[0].name) {
+            this.$message.error('请先完成用户信息管理')
+          } else {
+            let newpage = this.$router.resolve({
+              name: 'upload',
+            })
+            window.open(newpage.href, '_blank')
+          }
+        })
+    },
   },
 }
 </script>
@@ -64,10 +75,12 @@ export default {
   -o-background-size: cover;
   background-position: center 0;
   .main {
-    width: 40%;
+    width: 15%;
     height: 90%;
     margin-top: 15%;
     margin-left: 55%;
+    text-align: center;
+    font-size: 20px;
   }
   .box-card {
     margin-bottom: 10%;
