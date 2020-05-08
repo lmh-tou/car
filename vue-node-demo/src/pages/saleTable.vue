@@ -21,7 +21,12 @@
       <el-table-column prop="distance" label="行驶里程" width="180"> </el-table-column>
       <el-table-column label="图片" width="180">
         <template slot-scope="scope">
-          <img :src="showImg(scope.row.img)" alt="" v-if="scope.row.img" />
+          <img
+            :src="showImg(scope.row.img)"
+            alt=""
+            v-if="scope.row.img"
+            class="showImg"
+          />
         </template>
       </el-table-column>
       <el-table-column label="操作" width="180" fixed="right">
@@ -107,7 +112,7 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span='12' :offset='3'>
+          <el-col :span="12" :offset="3">
             <el-upload
               action="#"
               list-type="picture-card"
@@ -116,7 +121,6 @@
               ref="upload"
               :on-exceed="onExceed"
               :on-change="fileChange"
-              :disabled="show"
             >
               <div slot="tip" class="el-upload__tip">
                 只能上传一张jpg/png文件
@@ -141,6 +145,9 @@
                 </span>
               </div>
             </el-upload>
+            <el-dialog :visible.sync="dialogVisible1" :modal="false">
+              <img width="100%" :src="dialogImageUrl" alt="" />
+            </el-dialog>
           </el-col>
         </el-row>
       </el-form>
@@ -159,7 +166,9 @@ export default {
     return {
       tableData: [],
       dialogVisible: false,
+      dialogVisible1: false,
       userName: '',
+      dialogImageUrl: '',
       form: {
         img: '',
         userName: '',
@@ -180,10 +189,9 @@ export default {
       return require('../../../server/img/' + icon)
     },
     edit(row) {
-      console.log(row)
       this.dialogVisible = true
       this.form.img = row.img
-      this.form.userNamw = row.userName
+      this.form.userName = row.userName
       this.form.password = row.password
       this.form.phone = row.phone
       this.form.name = row.name
@@ -194,24 +202,81 @@ export default {
       this.form.distance = row.distance
       this.form.time = row.time
     },
+    onExceed() {
+      this.$message.warning('当前限制选择1个文件')
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible1 = true
+    },
+    handleRemove() {
+      this.$refs.upload.clearFiles()
+    },
+    fileChange(file) {
+      this.file = file
+    },
     cancel() {
       this.dialogVisible = false
     },
     deleteOne(row) {
-      this.$http.post('/api/sale/deleteOne', {
-        userName: row.userName
-      }).then(() => {
-        this.reload();
-        this.$message.success('删除成功')
-      })
+      this.$http
+        .post('/api/sale/deleteOne', {
+          userName: row.userName,
+        })
+        .then(() => {
+          this.reload()
+          this.$message.success('删除成功')
+        })
+    },
+    confirm() {
+      if (this.$refs.upload.uploadFiles.length == 0) {
+        this.uploadMessage()
+      } else {
+        if (this.file.raw.type == 'image/jpeg' || this.file.raw.type == 'image/png') {
+          this.uploadMessage()
+          const formData = new FormData()
+          const file = this.$refs.upload.uploadFiles[0]
+          const headerConfig = {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          }
+          formData.append('file', file.raw)
+          this.$http.post('/api/sale/upload', formData, headerConfig).then(() => {
+            this.reload()
+          })
+        } else {
+          this.$message.warning('只能上传jpg/png格式的图片')
+        }
+      }
+    },
+    uploadMessage() {
+      let time = this.$moment(this.form.time).format('YYYY-MM-DD HH:mm:ss')
+      this.$http
+        .post('/api/sale/saleTable', {
+          password: this.form.password,
+          phone: this.form.phone,
+          name: this.form.name,
+          address: this.form.address,
+          describe1: this.form.describe1,
+          money: this.form.money,
+          brand: this.form.brand,
+          time,
+          distance: this.form.distance,
+          saleUserName: this.form.userName
+        })
+        .then(() => {
+          this.reload()
+          this.$message.success('修改成功')
+        })
     },
     search() {
-      this.$http.post('/api/sale/search', {
-        userName: this.userName
-      }).then((res) => {
-        this.tableData = res.data.data
-      })
-    }
+      this.$http
+        .post('/api/sale/search', {
+          userName: this.userName,
+        })
+        .then((res) => {
+          this.tableData = res.data.data
+        })
+    },
   },
   mounted() {
     this.$http.post('/api/sale/saleList').then((res) => {
@@ -223,7 +288,7 @@ export default {
 
 <style lang="less" scoped>
 .back {
-  img {
+  .showImg {
     width: 35px;
     height: 35px;
   }

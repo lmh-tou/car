@@ -19,7 +19,8 @@ var sqlMap = {
         uploadMessage: 'update sale set brand = ?, time = ?, distance = ?, money = ?, describe1 = ? where userName = ?',
         saleList: 'select * from sale',
         deleteOne: 'delete from sale where userName = ?',
-        search: 'select * from sale where userName = ?'
+        search: 'select * from sale where userName = ?',
+        saleTable: 'update sale set password = ?, phone = ?, name = ?, address = ?, describe1 = ?, money = ?, brand = ?, time = ?, distance = ? where userName = ?'
     }
 }
 

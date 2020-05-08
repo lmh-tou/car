@@ -67,6 +67,15 @@ router.post('/uploadMessage', (req, res) => {
   )
 })
 
+router.post('/saleTable', (req,res) => {
+  let conn = new DBHelper().getConn()
+  let params = req.body
+  userName = params.saleUserName
+  conn.query(sql.sale.saleTable, [params.password, params.phone, params.name, params.address, params.describe1, params.money, params.brand, params.time, params.distance, userName], (err, result) => {
+    res.json({session: 1})
+  })
+})
+
 router.post('/saleList', (req, res) => {
   let conn = new DBHelper().getConn()
   conn.query(sql.sale.saleList, (err, result) => {
