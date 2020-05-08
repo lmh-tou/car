@@ -12,16 +12,44 @@
         </div>
       </el-card>
       <el-card class="box-card">
+        <div @click="message">
+          消息通知
+        </div>
+      </el-card>
+      <el-card class="box-card">
         <div @click="loginOut">
           退出登录
         </div>
       </el-card>
     </div>
+    <el-dialog
+      title="消息"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :modal-append-to-body="false"
+    >
+      <div>买家账号：{{ this.userName }}</div>
+      <div>买家姓名：{{ this.name }}</div>
+      <div>买家手机号：{{ this.phone }}</div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="cancel">拒绝</el-button>
+        <el-button type="primary" @click="confirm">同意</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      dialogVisible: false,
+      userName: '',
+      name: '',
+      phone: '',
+      id: '',
+    }
+  },
   methods: {
     loginOut() {
       this.$router.replace('/')
@@ -51,6 +79,51 @@ export default {
             })
             window.open(newpage.href, '_blank')
           }
+        })
+    },
+    message() {
+      let saleUserName = sessionStorage.getItem('saleUserName')
+      this.$http
+        .post('/api/sale/saleMessage', {
+          saleUserName,
+        })
+        .then((res) => {
+          if (res.data.data.length == '0' || res.data.data[0].status != 6) {
+            this.$message.warning('暂无消息通知')
+            this.dialogVisible = false
+          } else {
+            this.dialogVisible = true
+            this.id = res.data.data[0].id
+            this.$http
+              .post('/api/sale/selectUser', {
+                userName: res.data.data[0].buy,
+              })
+              .then((res) => {
+                this.userName = res.data.data[0].userName
+                this.name = res.data.data[0].name
+                this.phone = res.data.data[0].phone
+              })
+          }
+        })
+    },
+    cancel() {
+      this.$http
+        .post('/api/sale/cancel', {
+          id: this.id,
+        })
+        .then(() => {
+          this.$message.success('已拒绝')
+          this.dialogVisible = false
+        })
+    },
+    confirm() {
+      this.$http
+        .post('/api/sale/confirm', {
+          id: this.id,
+        })
+        .then(() => {
+          this.$message.success('已同意')
+          this.dialogVisible = false
         })
     },
   },

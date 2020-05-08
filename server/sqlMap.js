@@ -25,13 +25,18 @@ var sqlMap = {
         selectSaleUserName: 'select * from car where saleUserName = ?',
         editCar: 'update car set money = ?, brand = ?, describe1 = ?, time = ?, distance = ? where saleUserName = ?',
         addUploadCar: 'insert into car(img) values (?)',
-        editUploadCar: 'update car set img = ? where saleUserName = ?'
+        editUploadCar: 'update car set img = ? where saleUserName = ?',
+        saleMessage: 'select * from orderList where sale = ?',
+        selectUser: 'select * from user where userName = ?',
+        cancel: 'update orderList set status = 2 where id = ?',
+        confirm: 'update orderList set status = 1 where id = ?'
     },
     admin: {
         list: 'select * from orderList where status = 3',
         agree: 'update orderList set status = 1 where id = ?',
         returnList: 'select * from orderList where status = 5',
-        returnCar: 'update orderList set status = 2 where id = ?'
+        returnCar: 'update orderList set status = 2 where id = ?',
+        apply: 'update orderList set status = 6 where id = ?'
     }
 }
 

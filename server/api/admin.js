@@ -39,4 +39,11 @@ router.post('/returnCar', (req, res) => {
   })
 })
 
+router.post('/apply', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.admin.apply, [req.body.id], (err, result) => {
+    res.json({ data: result, session: 1 })
+  })
+})
+
 module.exports = router

@@ -11,7 +11,6 @@ import SaleCar from './pages/saleCar'
 import OrderManage from './pages/orderManage'
 import ReturnCar from './pages/returnCar'
 
-
 Vue.use(Router)
 
 export default new Router({

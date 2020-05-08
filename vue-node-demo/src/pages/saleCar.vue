@@ -10,7 +10,7 @@
       <el-table-column prop="status" label="状态" width="180"> </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button @click="agree(scope.row)">同意售卖</el-button>
+          <el-button @click="agree(scope.row)">提交申请</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -27,10 +27,10 @@ export default {
   },
   methods: {
     agree(row) {
-        this.$http.post('/api/admin/agree', {
+        this.$http.post('/api/admin/apply', {
             id: row.id
         }).then(() => {
-            this.$message.success('已同意售卖')
+            this.$message.success('已提交申请')
             this.reload()
         })
     },

@@ -186,4 +186,32 @@ router.post('/search', (req, res) => {
   }
 })
 
+router.post('/saleMessage', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.sale.saleMessage, [req.body.saleUserName], (err, result) => {
+    res.json({data: result, session: 1})
+  })
+})
+
+router.post('/selectUser', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.sale.selectUser, [req.body.userName], (err, result) => {
+    res.json({data: result, session: 1})
+  })
+})
+
+router.post('/cancel', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.sale.cancel, [req.body.id], (err, result) => {
+    res.json({session: 1})
+  })
+})
+
+router.post('/confirm', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.sale.confirm, [req.body.id], (err, result) => {
+    res.json({session: 1})
+  })
+})
+
 module.exports = router

@@ -81,7 +81,7 @@ export default {
       carOptions: [
         {
           value: '1',
-          label: '售卖车辆',
+          label: '申请售卖',
         },
         {
           value: '2',
