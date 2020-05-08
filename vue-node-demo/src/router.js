@@ -7,6 +7,7 @@ import SaleManage from './pages/saleManage'
 import Upload from './pages/unload'
 import Admin from './pages/admin'
 import SaleTable from './pages/saleTable'
+import SaleCar from './pages/saleCar'
 
 
 Vue.use(Router)
@@ -52,6 +53,11 @@ export default new Router({
       path: '/saleTable',
       name: 'saleTable',
       component: SaleTable
+    },
+    {
+      path: '/saleCar',
+      name: 'saleCar',
+      component: SaleCar
     }
   ]
 })

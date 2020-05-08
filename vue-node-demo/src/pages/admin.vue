@@ -84,7 +84,7 @@ export default {
     },
     sale() {
       let newpage = this.$router.resolve({
-        name: 'sale',
+        name: 'saleCar',
       })
       window.open(newpage.href, '_blank')
     },

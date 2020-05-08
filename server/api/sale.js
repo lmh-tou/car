@@ -67,13 +67,66 @@ router.post('/uploadMessage', (req, res) => {
   )
 })
 
-router.post('/saleTable', (req,res) => {
+router.post('/addCar', (req, res) => {
+  let conn = new DBHelper().getConn()
+  let params = req.body
+  conn.query(sql.sale.selectSaleUserName, [params.saleUserName], (err, result) => {
+    if (result.length == 0) {
+      conn.query(
+        sql.sale.addCar,
+        [
+          params.money,
+          params.brand,
+          params.describe1,
+          params.time,
+          params.distance,
+          params.saleUserName,
+        ],
+        (err, result) => {
+          res.json({ session: 1 })
+        }
+      )
+    } else {
+      conn.query(
+        sql.sale.editCar,
+        [
+          params.money,
+          params.brand,
+          params.describe1,
+          params.time,
+          params.distance,
+          params.saleUserName,
+        ],
+        (err, result) => {
+          res.json({ session: 1 })
+        }
+      )
+    }
+  })
+})
+
+router.post('/saleTable', (req, res) => {
   let conn = new DBHelper().getConn()
   let params = req.body
   userName = params.saleUserName
-  conn.query(sql.sale.saleTable, [params.password, params.phone, params.name, params.address, params.describe1, params.money, params.brand, params.time, params.distance, userName], (err, result) => {
-    res.json({session: 1})
-  })
+  conn.query(
+    sql.sale.saleTable,
+    [
+      params.password,
+      params.phone,
+      params.name,
+      params.address,
+      params.describe1,
+      params.money,
+      params.brand,
+      params.time,
+      params.distance,
+      userName,
+    ],
+    (err, result) => {
+      res.json({ session: 1 })
+    }
+  )
 })
 
 router.post('/saleList', (req, res) => {

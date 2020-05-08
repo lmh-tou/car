@@ -20,7 +20,10 @@ var sqlMap = {
         saleList: 'select * from sale',
         deleteOne: 'delete from sale where userName = ?',
         search: 'select * from sale where userName = ?',
-        saleTable: 'update sale set password = ?, phone = ?, name = ?, address = ?, describe1 = ?, money = ?, brand = ?, time = ?, distance = ? where userName = ?'
+        saleTable: 'update sale set password = ?, phone = ?, name = ?, address = ?, describe1 = ?, money = ?, brand = ?, time = ?, distance = ? where userName = ?',
+        addCar: 'insert into car(money, brand, describe1, time, distance, saleUserName) values (?, ?, ?, ?, ?, ?)',
+        selectSaleUserName: 'select * from car where saleUserName = ?',
+        editCar: 'update car set money = ?, brand = ?, describe1 = ?, time = ?, distance = ? where saleUserName = ?'
     }
 }
 

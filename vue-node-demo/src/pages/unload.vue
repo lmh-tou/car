@@ -168,6 +168,14 @@ export default {
           this.$message.success('上传成功')
           this.show = true
         })
+      this.$http.post('/api/sale/addCar', {
+        brand: this.form.brand,
+        time,
+        distance: this.form.distance,
+        money: this.form.money,
+        describe1: this.form.describe1,
+        saleUserName,
+      })
     },
   },
   mounted() {
