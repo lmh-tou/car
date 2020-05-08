@@ -16,10 +16,27 @@ router.post('/list', (req, res) => {
 })
 
 router.post('/agree', (req, res) => {
-    let conn = new DBHelper().getConn()
-    conn.query(sql.admin.agree, [req.body.id], (err, result) => {
-        res.json({data: result, session: 1})
+  let conn = new DBHelper().getConn()
+  conn.query(sql.admin.agree, [req.body.id], (err, result) => {
+    res.json({ data: result, session: 1 })
+  })
+})
+
+router.post('/Returnlist', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.admin.returnList, (err, result) => {
+    result.forEach((item) => {
+      item.time = moment(item.time).format('YYYY-MM')
     })
+    res.json({ data: result, session: 1 })
+  })
+})
+
+router.post('/returnCar', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.admin.returnCar, [req.body.id], (err, result) => {
+    res.json({ data: result, session: 1 })
+  })
 })
 
 module.exports = router

@@ -29,7 +29,9 @@ var sqlMap = {
     },
     admin: {
         list: 'select * from orderList where status = 3',
-        agree: 'update orderList set status = 1 where id = ?'
+        agree: 'update orderList set status = 1 where id = ?',
+        returnList: 'select * from orderList where status = 5',
+        returnCar: 'update orderList set status = 2 where id = ?'
     }
 }
 

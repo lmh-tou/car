@@ -8,6 +8,8 @@ import Upload from './pages/unload'
 import Admin from './pages/admin'
 import SaleTable from './pages/saleTable'
 import SaleCar from './pages/saleCar'
+import OrderManage from './pages/orderManage'
+import ReturnCar from './pages/returnCar'
 
 
 Vue.use(Router)
@@ -58,6 +60,16 @@ export default new Router({
       path: '/saleCar',
       name: 'saleCar',
       component: SaleCar
+    },
+    {
+      path: '/orderManage',
+      name: 'orderManage',
+      component: OrderManage
+    },
+    {
+      path: '/returnCar',
+      name: 'returnCar',
+      component: ReturnCar
     }
   ]
 })

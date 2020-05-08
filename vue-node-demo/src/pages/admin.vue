@@ -2,8 +2,14 @@
   <div class="back">
     <div class="main">
       <el-form>
-        <el-form-item label="用户信息管理" class="text">
-          <el-select v-model="value" placeholder="请选择" class="select" @change="change">
+        <el-form-item class="text">
+          <el-select
+            v-model="value"
+            placeholder="用户信息管理"
+            class="select"
+            @change="change"
+            clearable
+          >
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -13,21 +19,27 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item class="text">
+          <el-select
+            v-model="carValue"
+            placeholder="车辆管理"
+            class="select"
+            @change="carManage"
+            clearable
+          >
+            <el-option
+              v-for="item in carOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
-
-      <el-card class="box-card">
-        <div @click="carManage">
-          车辆管理
-        </div>
-      </el-card>
       <el-card class="box-card">
         <div @click="orderManage">
           订单管理
-        </div>
-      </el-card>
-      <el-card class="box-card">
-        <div @click="sale">
-          售卖车辆
         </div>
       </el-card>
       <el-card class="box-card">
@@ -44,6 +56,8 @@ export default {
   data() {
     return {
       value: '',
+      orderValue: '',
+      carValue: '',
       options: [
         {
           value: '1',
@@ -52,6 +66,26 @@ export default {
         {
           value: '2',
           label: '卖家详情表',
+        },
+      ],
+      orderOptions: [
+        {
+          value: '1',
+          label: '订单列表',
+        },
+        {
+          value: '2',
+          label: '订单详情表',
+        },
+      ],
+      carOptions: [
+        {
+          value: '1',
+          label: '售卖车辆',
+        },
+        {
+          value: '2',
+          label: '退订车辆',
         },
       ],
     }
@@ -70,23 +104,24 @@ export default {
       })
       window.open(newpage.href, '_blank')
     },
-    carManage() {
-      let newpage = this.$router.resolve({
-        name: 'carManage',
-      })
-      window.open(newpage.href, '_blank')
-    },
     orderManage() {
       let newpage = this.$router.resolve({
         name: 'orderManage',
       })
       window.open(newpage.href, '_blank')
     },
-    sale() {
-      let newpage = this.$router.resolve({
-        name: 'saleCar',
-      })
-      window.open(newpage.href, '_blank')
+    carManage() {
+      if (this.carValue == 1) {
+        let newpage = this.$router.resolve({
+          name: 'saleCar',
+        })
+        window.open(newpage.href, '_blank')
+      } else {
+        let newpage = this.$router.resolve({
+          name: 'returnCar',
+        })
+        window.open(newpage.href, '_blank')
+      }
     },
     change() {
       if (this.value == 2) {
@@ -138,10 +173,5 @@ export default {
     margin-bottom: 10%;
     cursor: pointer;
   }
-}
-</style>
-<style>
-.el-form-item__label {
-  color: black !important;
 }
 </style>
