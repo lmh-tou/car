@@ -10,6 +10,7 @@ import SaleTable from './pages/saleTable'
 import SaleCar from './pages/saleCar'
 import OrderManage from './pages/orderManage'
 import ReturnCar from './pages/returnCar'
+import UserTable from './pages/userTable'
 
 Vue.use(Router)
 
@@ -69,6 +70,11 @@ export default new Router({
       path: '/returnCar',
       name: 'returnCar',
       component: ReturnCar
+    },
+    {
+      path: '/userTable',
+      name: 'userTable',
+      component: UserTable
     }
   ]
 })

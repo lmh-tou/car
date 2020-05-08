@@ -129,6 +129,11 @@ export default {
           name: 'saleTable',
         })
         window.open(newpage.href, '_blank')
+      } else {
+        let newpage = this.$router.resolve({
+          name: 'userTable',
+        })
+        window.open(newpage.href, '_blank')
       }
     },
   },
