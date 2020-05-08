@@ -26,6 +26,10 @@ var sqlMap = {
         editCar: 'update car set money = ?, brand = ?, describe1 = ?, time = ?, distance = ? where saleUserName = ?',
         addUploadCar: 'insert into car(img) values (?)',
         editUploadCar: 'update car set img = ? where saleUserName = ?'
+    },
+    admin: {
+        list: 'select * from orderList where status = 3',
+        agree: 'update orderList set status = 1 where id = ?'
     }
 }
 
