@@ -23,7 +23,9 @@ var sqlMap = {
         saleTable: 'update sale set password = ?, phone = ?, name = ?, address = ?, describe1 = ?, money = ?, brand = ?, time = ?, distance = ? where userName = ?',
         addCar: 'insert into car(money, brand, describe1, time, distance, saleUserName) values (?, ?, ?, ?, ?, ?)',
         selectSaleUserName: 'select * from car where saleUserName = ?',
-        editCar: 'update car set money = ?, brand = ?, describe1 = ?, time = ?, distance = ? where saleUserName = ?'
+        editCar: 'update car set money = ?, brand = ?, describe1 = ?, time = ?, distance = ? where saleUserName = ?',
+        addUploadCar: 'insert into car(img) values (?)',
+        editUploadCar: 'update car set img = ? where saleUserName = ?'
     }
 }
 

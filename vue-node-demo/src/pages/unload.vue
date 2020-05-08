@@ -142,6 +142,7 @@ export default {
                 this.reload()
                 this.$message.success('上传成功')
               })
+              this.$http.post('/api/sale/uploadCar', formData, headerConfig)
             } else {
               this.$message.warning('只能上传jpg/png格式的图片')
             }

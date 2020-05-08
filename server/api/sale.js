@@ -47,6 +47,21 @@ router.post('/upload', upload.single('file'), (req, res) => {
   })
 })
 
+router.post('/uploadCar', upload.single('file'), (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.sale.selectSaleUserName, [userName], (err, result) => {
+    if (result.length == 0) {
+      conn.query(sql.sale.addUploadCar, [req.file.filename], (err, result) => {
+        res.json({ session: 1 })
+      })
+    } else {
+      conn.query(sql.sale.editUploadCar, [req.file.filename, userName], (err, result) => {
+        res.json({ session: 1 })
+      })
+    }
+  })
+})
+
 router.post('/uploadMessage', (req, res) => {
   let params = req.body
   userName = params.saleUserName
