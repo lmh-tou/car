@@ -28,20 +28,26 @@ var sqlMap = {
         editUploadCar: 'update car set img = ? where saleUserName = ?',
         saleMessage: 'select * from orderList where sale = ?',
         selectUser: 'select * from user where userName = ?',
-        cancel: 'update orderList set status = 2 where id = ?',
-        confirm: 'update orderList set status = 1 where id = ?',
+        cancel: 'update orderList set status = 2, label = "已取消" where id = ?',
+        confirm: 'update orderList set status = 1, label = "已完成" where id = ?',
         deleteCar: 'delete from car where id = ?'
     },
     admin: {
         list: 'select * from orderList where status = 3',
-        agree: 'update orderList set status = 1 where id = ?',
+        agree: 'update orderList set status = 1, label = "已完成" where id = ?',
         returnList: 'select * from orderList where status = 5',
-        returnCar: 'update orderList set status = 2 where id = ?',
-        apply: 'update orderList set status = 6 where id = ?',
+        returnCar: 'update orderList set status = 2, label = "已取消" where id = ?',
+        apply: 'update orderList set status = 6, label = "已申请" where id = ?',
         getUserList: 'select * from user',
         deleteOne: 'delete from user where userName = ?',
         search:'select * from user where userName = ?',
-        editUser: 'update user set password = ?, phone = ?, name = ?, address  = ? where userName = ?'
+        editUser: 'update user set password = ?, phone = ?, name = ?, address  = ? where userName = ?',
+        orderList: 'select * from orderList',
+        statusList: 'select * from status',
+        editOrder: 'update orderList set buy = ?, sale = ?, time = ?, place = ?, money = ?, status = ?, label = ? where id = ?',
+        orderById: 'select * from orderList where id = ?',
+        orderByStatus: 'select * from orderList where status = ?',
+        orderByAll: 'select * from orderList where id = ? and status = ?'
     }
 }
 
