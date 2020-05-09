@@ -48,6 +48,7 @@ export default {
       name: '',
       phone: '',
       id: '',
+      carId: ''
     }
   },
   methods: {
@@ -94,6 +95,7 @@ export default {
           } else {
             this.dialogVisible = true
             this.id = res.data.data[0].id
+            this.carId = res.data.data[0].carId
             this.$http
               .post('/api/sale/selectUser', {
                 userName: res.data.data[0].buy,
@@ -120,6 +122,7 @@ export default {
       this.$http
         .post('/api/sale/confirm', {
           id: this.id,
+          carId: this.carId
         })
         .then(() => {
           this.$message.success('已同意')

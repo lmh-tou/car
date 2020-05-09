@@ -212,6 +212,9 @@ router.post('/confirm', (req, res) => {
   conn.query(sql.sale.confirm, [req.body.id], (err, result) => {
     res.json({session: 1})
   })
+  conn.query(sql.sale.deleteCar, [req.body.carId], (err, result) => {
+    res.json({session: 1})
+  })
 })
 
 module.exports = router

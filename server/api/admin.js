@@ -46,4 +46,31 @@ router.post('/apply', (req, res) => {
   })
 })
 
+router.post('/userList', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.admin.getUserList, (err, result) => {
+    res.json({ data: result, session: 1 })
+  })
+})
+
+router.post('/deleteOne', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.admin.deleteOne, [req.body.userName], (err, result) => {
+    res.json({ data: result, session: 1 })
+  })
+})
+
+router.post('/search', (req, res) => {
+  let conn = new DBHelper().getConn()
+  if (req.body.userName == '') {
+    conn.query(sql.admin.getUserList, (err, result) => {
+      res.json({ data: result, session: 1 })
+    })
+  } else {
+    conn.query(sql.admin.search, [req.body.userName], (err, result) => {
+      res.json({ data: result, session: 1 })
+    })
+  }
+})
+
 module.exports = router

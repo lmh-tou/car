@@ -29,14 +29,18 @@ var sqlMap = {
         saleMessage: 'select * from orderList where sale = ?',
         selectUser: 'select * from user where userName = ?',
         cancel: 'update orderList set status = 2 where id = ?',
-        confirm: 'update orderList set status = 1 where id = ?'
+        confirm: 'update orderList set status = 1 where id = ?',
+        deleteCar: 'delete from car where id = ?'
     },
     admin: {
         list: 'select * from orderList where status = 3',
         agree: 'update orderList set status = 1 where id = ?',
         returnList: 'select * from orderList where status = 5',
         returnCar: 'update orderList set status = 2 where id = ?',
-        apply: 'update orderList set status = 6 where id = ?'
+        apply: 'update orderList set status = 6 where id = ?',
+        getUserList: 'select * from user',
+        deleteOne: 'delete from user where userName = ?',
+        search:'select * from user where userName = ?'
     }
 }
 

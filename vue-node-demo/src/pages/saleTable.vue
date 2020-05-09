@@ -261,7 +261,7 @@ export default {
           brand: this.form.brand,
           time,
           distance: this.form.distance,
-          saleUserName: this.form.userName
+          saleUserName: this.form.userName,
         })
         .then(() => {
           this.reload()
@@ -296,5 +296,10 @@ export default {
     width: 300px;
     height: 200px;
   }
+}
+</style>
+<style>
+.el-form-item__label {
+  color: black !important;
 }
 </style>
