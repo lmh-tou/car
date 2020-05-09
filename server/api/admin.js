@@ -73,4 +73,12 @@ router.post('/search', (req, res) => {
   }
 })
 
+router.post('/editUser', (req, res) => {
+  let conn = new DBHelper().getConn()
+  let params = req.body
+  conn.query(sql.admin.editUser, [params.password, params.phone,params.name, params.addressm, params.userName], (err, result) => {
+    res.json({session: 1})
+  })
+})
+
 module.exports = router

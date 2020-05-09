@@ -40,7 +40,8 @@ var sqlMap = {
         apply: 'update orderList set status = 6 where id = ?',
         getUserList: 'select * from user',
         deleteOne: 'delete from user where userName = ?',
-        search:'select * from user where userName = ?'
+        search:'select * from user where userName = ?',
+        editUser: 'update user set password = ?, phone = ?, name = ?, address  = ? where userName = ?'
     }
 }
 

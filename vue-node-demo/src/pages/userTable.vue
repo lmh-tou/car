@@ -103,6 +103,18 @@ export default {
           this.$message.success('删除成功')
         })
     },
+    confirm() {
+      this.$http.post('/api/admin/editUser', {
+        userName: this.form.userName,
+        password: this.form.password,
+        phone: this.form.phone,
+        name: this.form.name,
+        address: this.form.address
+      }).then(() => {
+        this.reload()
+        this.$message.success('修改成功')
+      })
+    },
     search() {
       this.$http
         .post('/api/admin/search', {
