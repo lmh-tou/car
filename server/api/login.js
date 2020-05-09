@@ -7,7 +7,7 @@ const sql = require('../sqlMap')
 router.post('/login', (req, res) => {
   let conn = new DBHelper().getConn()
   let params = req.body
-  if (params.identity == '1') {
+  if (params.identity == '1' && params.userName != 'admin') {
     conn.query(
       sql.login.select,
       [params.userName, params.password, params.phone],
@@ -40,7 +40,7 @@ router.post('/login', (req, res) => {
       }
     )
   } else {
-    if (params.userName == 'admin') {
+    if (params.userName == 'admin' && params.identity != '2' && params.identity != '1') {
       conn.query(
         sql.login.select,
         [params.userName, params.password, params.phone],

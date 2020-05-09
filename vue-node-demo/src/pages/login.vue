@@ -113,6 +113,9 @@ export default {
                 sessionStorage.setItem('saleUserName', this.formLogin.userName)
               } else if (res.data.identity == '管理员') {
                 this.$router.push('/admin')
+              } else {
+                this.$router.push('/user')
+                sessionStorage.setItem('userName', this.formLogin.userName)
               }
             } else {
               this.$message.error(`${res.data.message}`)

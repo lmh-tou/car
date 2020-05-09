@@ -48,6 +48,10 @@ var sqlMap = {
         orderById: 'select * from orderList where id = ?',
         orderByStatus: 'select * from orderList where status = ?',
         orderByAll: 'select * from orderList where id = ? and status = ?'
+    },
+    user: {
+        list: 'select * from user where userName = ?',
+        save: 'update user set password = ?, phone = ?, name = ?, address = ? where userName = ?'
     }
 }
 

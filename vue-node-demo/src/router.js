@@ -11,6 +11,9 @@ import SaleCar from './pages/saleCar'
 import OrderManage from './pages/orderManage'
 import ReturnCar from './pages/returnCar'
 import UserTable from './pages/userTable'
+import User from './pages/user'
+import UserManage from './pages/userManage'
+import Look from './pages/look'
 
 Vue.use(Router)
 
@@ -75,6 +78,21 @@ export default new Router({
       path: '/userTable',
       name: 'userTable',
       component: UserTable
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: User
+    },
+    {
+      path: '/userManage',
+      name: 'userManage',
+      component: UserManage
+    },
+    {
+      path: '/look',
+      name: 'look',
+      component: Look
     }
   ]
 })
