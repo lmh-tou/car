@@ -51,7 +51,12 @@ var sqlMap = {
     },
     user: {
         list: 'select * from user where userName = ?',
-        save: 'update user set password = ?, phone = ?, name = ?, address = ? where userName = ?'
+        save: 'update user set password = ?, phone = ?, name = ?, address = ? where userName = ?',
+        carList: 'select * from car',
+        toCar: 'select * from car where id = ?',
+        search: 'select * from car where brand like concat("%",?,"%")',
+        reservation: 'insert into orderList(buy, sale, time, place, money, status, carId, label) values (?, ?, ?, ?, ?, ?, ?, ?) ',
+        buy: 'update orderList set status = 3, label = "审核中" where carId = ? and buy = ?'
     }
 }
 

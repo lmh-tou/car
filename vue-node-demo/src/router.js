@@ -14,6 +14,7 @@ import UserTable from './pages/userTable'
 import User from './pages/user'
 import UserManage from './pages/userManage'
 import Look from './pages/look'
+import Details from './pages/details'
 
 Vue.use(Router)
 
@@ -93,6 +94,11 @@ export default new Router({
       path: '/look',
       name: 'look',
       component: Look
+    },
+    {
+      path: '/details',
+      name: 'details',
+      component: Details
     }
   ]
 })
