@@ -79,4 +79,18 @@ router.post('/buy', (req, res) => {
   })
 })
 
+router.post('/selectReturn', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.user.selectReturn, [req.body.userName], (err, result) => {
+    res.json({session: 1, data: result})
+  })
+})
+
+router.post('/userReturn', (req, res) => {
+  let conn = new DBHelper().getConn()
+  conn.query(sql.user.userReturn, [req.body.id], (err, result) => {
+    res.json({session: 1})
+  })
+})
+
 module.exports = router

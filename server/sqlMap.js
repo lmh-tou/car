@@ -56,7 +56,9 @@ var sqlMap = {
         toCar: 'select * from car where id = ?',
         search: 'select * from car where brand like concat("%",?,"%")',
         reservation: 'insert into orderList(buy, sale, time, place, money, status, carId, label) values (?, ?, ?, ?, ?, ?, ?, ?) ',
-        buy: 'update orderList set status = 3, label = "审核中" where carId = ? and buy = ?'
+        buy: 'update orderList set status = 3, label = "审核中" where carId = ? and buy = ?',
+        selectReturn: 'select * from orderList where buy = ? and (status = 3 || status = 4 || status = 6)',
+        userReturn: 'update orderList set status = 5, label = "退货审核中" where id = ?'
     }
 }
 

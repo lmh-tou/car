@@ -12,22 +12,22 @@
         </div>
       </el-card>
       <el-card class="box-card">
-        <div @click="cancel">
+        <div @click="returnCar">
           退订车辆
         </div>
       </el-card>
       <el-card class="box-card">
-        <div @click="like">
+        <div>
           猜你喜欢
         </div>
       </el-card>
       <el-card class="box-card">
-        <div @click="consult">
+        <div>
           用户咨询
         </div>
       </el-card>
       <el-card class="box-card">
-        <div @click="consult">
+        <div>
           我的订单
         </div>
       </el-card>
@@ -37,11 +37,30 @@
         </div>
       </el-card>
     </div>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :modal-append-to-body="false"
+    >
+      <span>当前订单状态为{{this.label}}，请选择是否退订，如需查看详细订单信息，可进入我的订单进行查看</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirm">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      dialogVisible: false,
+      label: '',
+      id: ''
+    }
+  },
   methods: {
     loginOut() {
       this.$router.replace('/')
@@ -63,6 +82,30 @@ export default {
             this.$router.push('/look')
           }
         })
+    },
+    returnCar() {
+      let userName = sessionStorage.getItem('userName')
+      this.$http
+        .post('/api/user/selectReturn', {
+          userName,
+        })
+        .then((res) => {
+          if (res.data.data.length == 0) {
+            this.$message.warning('暂无可退订车辆')
+          } else {
+            this.label = res.data.data[0].label
+            this.id = res.data.data[0].id
+            this.dialogVisible = true
+          }
+        })
+    },
+    confirm() {
+      this.$http.post('/api/user/userReturn', {
+        id: this.id
+      }).then(() => {
+        this.dialogVisible = false
+        this.$message.success('退货申请已发出')
+      })
     },
     userManage() {
       let newpage = this.$router.resolve({
