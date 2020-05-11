@@ -17,7 +17,7 @@
         </div>
       </el-card>
       <el-card class="box-card">
-        <div>
+        <div @click="guess">
           猜你喜欢
         </div>
       </el-card>
@@ -27,7 +27,7 @@
         </div>
       </el-card>
       <el-card class="box-card">
-        <div>
+        <div @click="myOrder">
           我的订单
         </div>
       </el-card>
@@ -83,6 +83,9 @@ export default {
           }
         })
     },
+    guess() {
+      this.$router.push('/guess')
+    },
     returnCar() {
       let userName = sessionStorage.getItem('userName')
       this.$http
@@ -99,6 +102,9 @@ export default {
           }
         })
     },
+    myOrder() {
+      this.$router.push('/myOrder')
+    }, 
     confirm() {
       this.$http.post('/api/user/userReturn', {
         id: this.id

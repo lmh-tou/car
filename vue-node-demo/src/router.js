@@ -15,6 +15,8 @@ import User from './pages/user'
 import UserManage from './pages/userManage'
 import Look from './pages/look'
 import Details from './pages/details'
+import Guess from './pages/guess'
+import MyOrder from './pages/myOrder'
 
 Vue.use(Router)
 
@@ -99,6 +101,16 @@ export default new Router({
       path: '/details',
       name: 'details',
       component: Details
+    },
+    {
+      path: '/guess',
+      name: 'guess',
+      component: Guess
+    },
+    {
+      path: '/myOrder',
+      name: 'myOrder',
+      component: MyOrder
     }
   ]
 })

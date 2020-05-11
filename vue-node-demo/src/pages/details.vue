@@ -1,7 +1,7 @@
 <template>
   <div class="back">
     <div class="content">
-      <img src="../../../server/img/car.jpg" alt="" />
+      <img :src="showImg(detail.img)" alt="" />
       <div class="deta">
         <div>
           <span class="text">品牌名称：</span>
@@ -72,6 +72,9 @@ export default {
         }).then(() => {
             this.$message.success('购买申请已提交')
         })
+    },
+    showImg(icon) {
+      return require('../../../server/img/' + icon)
     }
   },
   mounted() {

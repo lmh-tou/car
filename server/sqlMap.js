@@ -58,7 +58,10 @@ var sqlMap = {
         reservation: 'insert into orderList(buy, sale, time, place, money, status, carId, label) values (?, ?, ?, ?, ?, ?, ?, ?) ',
         buy: 'update orderList set status = 3, label = "审核中" where carId = ? and buy = ?',
         selectReturn: 'select * from orderList where buy = ? and (status = 3 || status = 4 || status = 6)',
-        userReturn: 'update orderList set status = 5, label = "退货审核中" where id = ?'
+        userReturn: 'update orderList set status = 5, label = "退货审核中" where id = ?',
+        guess: 'select * from car order BY rand() limit 8',
+        myOrder: 'select * from orderList where buy = ?',
+        myCar: 'select * from car where id = ?'
     }
 }
 
